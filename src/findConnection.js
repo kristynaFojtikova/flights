@@ -1,6 +1,6 @@
 
-const addNextConnectingFlights = (connections: [string, string, number][][], allFlights: [string, string, number][], destination: string) => {
-    return connections.reduce((acc: [string, string, number][][], connection) => {
+const addNextConnectingFlights = (connections, allFlights, destination) => {
+    return connections.reduce((acc, connection) => {
         const lastFlight = connection[connection.length - 1];
         if (lastFlight[1] === destination) {
             acc.push(connection)
@@ -16,9 +16,9 @@ const addNextConnectingFlights = (connections: [string, string, number][][], all
     }, [])
 }
 
-export const findConnection = (origin: string, destination: string, allFlights: [string, string, number][], maxConnections: number) => {
+export const findConnection = (origin, destination, allFlights, maxConnections) => {
     const departures = allFlights.filter(flight => flight[0] === origin)
-    let connections: [string, string, number][][] = departures.map(flight => [flight]);
+    let connections = departures.map(flight => [flight]);
     let i = 0;
     while (i < maxConnections - 1) {
         connections = addNextConnectingFlights(connections, allFlights, destination)
