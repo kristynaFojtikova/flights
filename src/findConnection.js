@@ -24,11 +24,13 @@ export const findConnection = (origin, destination, allFlights, maxConnections) 
         connections = addNextConnectingFlights(connections, allFlights, destination)
         i++
     }
-    const connection = connections
+    const sucessfulConnections = connections
         .filter(connection => {
             return connection[connection.length - 1][1] === destination
         })
-        .sort((a,b) => a[2] > b[2] ? -1 : 1)[0]
+        .sort((a,b) => a[2] > b[2] ? -1 : 1);
+
+    const connection = sucessfulConnections[0];
     if (!connection) {
         console.log("No connection found");
         return null
