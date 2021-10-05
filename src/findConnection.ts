@@ -20,8 +20,6 @@ export const findConnection = (origin: string, destination: string, allFlights: 
     const departures = allFlights.filter(flight => flight[0] === origin)
     let connections: [string, string, number][][] = departures.map(flight => [flight]);
     let i = 0;
-
-    
     while (i < maxConnections - 1) {
         connections = addNextConnectingFlights(connections, allFlights, destination)
         i++
@@ -31,13 +29,11 @@ export const findConnection = (origin: string, destination: string, allFlights: 
             return connection[connection.length - 1][1] === destination
         })
         .sort((a,b) => a[2] > b[2] ? -1 : 1)[0]
-
-
     if (!connection) {
         console.log("No connection found");
         return null
     }
-    console.log("FOUND CONNECTION", connection)
+    console.log("Found connection: ", connection)
     return connection
 }
 
